@@ -1,5 +1,5 @@
 const paths= {
-    HOME: 'home',
+    HOME: '/',
     PLAY: 'jugar'
 }
 export default paths
