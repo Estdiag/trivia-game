@@ -1,9 +1,10 @@
 import PropTypes from 'prop-types';
+
 export default function Select({ name, label, onChange, children, value }) {
   return (
-    <div>
+    <div >
       <label htmlFor={name}>{label}</label>
-      <select onChange={onChange} value={value} name={name}>
+      <select id={name} name={name} onChange={onChange} value={value}>
         {children}
       </select>
     </div>

@@ -7,23 +7,19 @@ export default function Filters({ onChange, values }) {
     <form>
       <Select
         name="category"
-        label="category"
+        label="Category"
         onChange={onChange}
         value={values.category}
       >
-        <option value="" selected={values.category === ''}>
-          Any category
-        </option>
+        <option value="">Any category</option>
         {Object.entries(categories).map(([name, value]) => (
           <option key={name} value={name}>
             {value}
           </option>
         ))}
       </Select>
-      <Select name="type" label="type" onChange={onChange} value={values.type}>
-        <option value="" selected={values.type === ''}>
-          Any type
-        </option>
+      <Select name="type" label="Type" onChange={onChange} value={values.type}>
+        <option value="">Any type</option>
         {Object.entries(type).map(([name, value]) => (
           <option key={name} value={name}>
             {value}
@@ -32,13 +28,11 @@ export default function Filters({ onChange, values }) {
       </Select>
       <Select
         name="difficulty"
-        label="difficulty"
+        label="Difficulty"
         onChange={onChange}
         value={values.difficulty}
       >
-        <option value="" selected={values.difficulty === ''}>
-          Any difficulty
-        </option>
+        <option value="">Any difficulty</option>
         {Object.entries(difficulty).map(([name, value]) => (
           <option key={name} value={name}>
             {value}
@@ -50,10 +44,10 @@ export default function Filters({ onChange, values }) {
 }
 
 Filters.propTypes = {
-  onChange: PropTypes.func,
+  onChange: PropTypes.func.isRequired,
   values: PropTypes.shape({
     category: PropTypes.string,
     type: PropTypes.string,
     difficulty: PropTypes.string,
-  }),
+  }).isRequired,
 };

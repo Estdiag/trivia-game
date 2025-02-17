@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import Button from './Button';
 import { useMemo } from 'react';
 
-export default function Question({ question, answerHandler }) {
+export default function Question({ question, handleAnswer }) {
   const unorderedAnswerOptions = useMemo(
     () =>
       [...question.incorrect_answers, question.correct_answer].sort(
@@ -13,9 +13,9 @@ export default function Question({ question, answerHandler }) {
 
   const validateAnswer = selectedAnswer => {
     if (selectedAnswer === question.correct_answer) {
-      answerHandler('right');
+      handleAnswer('right');
     } else {
-      answerHandler('wrong');
+      handleAnswer('wrong');
     }
   };
 
@@ -51,5 +51,5 @@ Question.propTypes = {
     correct_answer: PropTypes.string,
     incorrect_answers: PropTypes.array,
   }).isRequired,
-  answerHandler: PropTypes.func.isRequired,
+  handleAnswer: PropTypes.func.isRequired,
 };

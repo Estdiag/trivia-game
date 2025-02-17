@@ -1,11 +1,11 @@
 import { useState, useCallback } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import Button from '../components/Button';
 import Question from '../components/Question';
 import Modal from '../components/Modal';
 import Filters from '../components/Filters';
 import { categories, type, difficulty } from '../types/gameFilters';
 import getRandomKey from '../util/getRandomKey';
-import { useQuery } from '@tanstack/react-query';
 import fetchData from '../util/getQuestions';
 
 const initialRevealAnswer = {
@@ -32,7 +32,7 @@ export default function Game() {
   const {
     data,
     isLoading,
-    // error,
+    error,
     refetch,
   } = useQuery({
     queryKey: ['questions'],
@@ -40,7 +40,7 @@ export default function Game() {
     enabled: true,
   });
 
-  const answerHandler = useCallback(
+  const handleAnswer = useCallback(
     type => {
       if (revealAnswer.question !== data?.results[currentQuestion].question) {
         setAnswers(prev => ({
@@ -58,10 +58,10 @@ export default function Game() {
         show: false,
       });
     },
-    [setAnswers, data?.results, currentQuestion, setRevealAnswer, revealAnswer]
+    [data?.results, currentQuestion,  revealAnswer]
   );
 
-  const revealAnswerHandler = () => {
+  const handleRevealAnswer = () => {
     if (revealAnswer.question !== data?.results[currentQuestion].question) {
       setAnswers({ ...answers, burnedQuestion: answers.burnedQuestion + 1 });
     }
@@ -89,6 +89,10 @@ export default function Game() {
     return <p>Cargando</p>;
   }
 
+  if (error) {
+    return <p>ha ocurrido un error</p>;
+  }
+
   if (data?.results.length === 0 || !data) {
     return (
       <>
@@ -108,10 +112,10 @@ export default function Game() {
       <p>Preguntas quemadas: {answers.burnedQuestion}</p>
       <Question
         question={data?.results[currentQuestion]}
-        answerHandler={answerHandler}
+        handleAnswer={handleAnswer}
       />
 
-      <Button onClick={() => revealAnswerHandler()}>REVEAL ANSWER</Button>
+      <Button onClick={() => handleRevealAnswer()}>REVEAL ANSWER</Button>
       <Button
         onClick={() => nextQuestionHandler()}
         disabled={
