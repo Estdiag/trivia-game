@@ -2,7 +2,11 @@ import PropTypes from 'prop-types';
 import Button from './Button';
 import { useMemo } from 'react';
 
-export default function Question({ question }) {
+export default function Question({
+  question,
+  rightAnswerHandler,
+  wrongAnswerHandler,
+}) {
   const unorderedAnswerOptions = useMemo(
     () =>
       [...question.incorrect_answers, question.correct_answer].sort(
@@ -10,6 +14,14 @@ export default function Question({ question }) {
       ),
     [question.incorrect_answers, question.correct_answer]
   );
+
+  const validateAnswer = selectedAnswer => {
+    if (selectedAnswer === question.correct_answer) {
+      rightAnswerHandler();
+    } else {
+      wrongAnswerHandler();
+    }
+  };
 
   return (
     <>
@@ -21,7 +33,14 @@ export default function Question({ question }) {
       <h3>{question.question}</h3>
 
       {unorderedAnswerOptions.map(answers => (
-        <Button key={answers}>{answers}</Button>
+        <Button
+          key={answers}
+          onClick={() => {
+            validateAnswer(answers);
+          }}
+        >
+          {answers}
+        </Button>
       ))}
     </>
   );
@@ -36,4 +55,6 @@ Question.propTypes = {
     correct_answer: PropTypes.string,
     incorrect_answers: PropTypes.array,
   }).isRequired,
+  rightAnswerHandler: PropTypes.func.isRequired,
+  wrongAnswerHandler: PropTypes.func.isRequired,
 };
