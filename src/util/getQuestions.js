@@ -1,6 +1,4 @@
-const fetchData = async ({ queryKey }) => {
-  const [, filters] = queryKey;
-
+const fetchData = async filters => {
   const url = new URL(import.meta.env.VITE_API_URL);
   const filterDos = { ...filters };
   Object.keys(filterDos).forEach(key => {
