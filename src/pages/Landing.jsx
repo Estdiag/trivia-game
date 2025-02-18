@@ -5,7 +5,7 @@ import Button from '../components/Button';
 export default function Landing() {
   const navigate = useNavigate();
   return (
-    <div className="flex flex-col justify-around" >
+    <div className="flex flex-col justify-around h-full items-center" >
       <h1 className="text-center text-6xl text-violet-600">Hello, Welcome</h1>
       <Button
         onClick={() => {

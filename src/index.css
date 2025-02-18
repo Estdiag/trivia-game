@@ -22,6 +22,7 @@
     background-color: var(--color-violet-600);
     color: #fff;
     box-shadow: var(--shadow-md);
+    max-width: 300px;
     &:hover:not(:disabled) {
       @media (hover: hover) {
         cursor: pointer;

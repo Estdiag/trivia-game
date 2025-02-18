@@ -49,7 +49,7 @@ export default function Filters({ onChange, values, onClick }) {
       </Select>
       <div>
         <Button className="btn-primary" type="submit">
-          Consultar
+          Search
         </Button>
       </div>
     </form>
