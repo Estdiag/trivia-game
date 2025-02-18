@@ -1,10 +1,18 @@
 import { categories, type, difficulty } from '../types/gameFilters';
 import Select from './Select';
 import PropTypes from 'prop-types';
+import Button from '../components/Button';
 
-export default function Filters({ onChange, values }) {
+export default function Filters({ onChange, values, onClick }) {
+  const handleSubmit = event => {
+    event.preventDefault();
+    onClick();
+  };
   return (
-    <form>
+    <form
+      className="w-full flex flex-col gap-4 h-fit items-center"
+      onSubmit={handleSubmit}
+    >
       <Select
         name="category"
         label="Category"
@@ -39,12 +47,18 @@ export default function Filters({ onChange, values }) {
           </option>
         ))}
       </Select>
+      <div>
+        <Button className="btn-primary" type="submit">
+          Consultar
+        </Button>
+      </div>
     </form>
   );
 }
 
 Filters.propTypes = {
   onChange: PropTypes.func.isRequired,
+  onClick: PropTypes.func.isRequired,
   values: PropTypes.shape({
     category: PropTypes.string,
     type: PropTypes.string,
