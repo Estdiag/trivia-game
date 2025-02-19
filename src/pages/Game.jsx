@@ -143,8 +143,8 @@ export default function Game() {
           question={data?.results[currentQuestion]}
           handleAnswer={handleAnswer}
         />
-        <div className="flex w-full justify-end gap-5 flex-wrap">
-          <Button onClick={() => handleRevealAnswer()} className="btn-primary">
+        <div className="flex w-full justify-center md:justify-end gap-5 flex-wrap">
+       <Button onClick={() => handleRevealAnswer()} className="btn-primary">
             REVEAL ANSWER
           </Button>
           <Button
@@ -158,6 +158,10 @@ export default function Game() {
             NEXT QUESTION
           </Button>
         </div>
+
+        {/* Si el modal no se usará con poca frecuencia, podríamos cargarlo de forma diferida con lazy, 
+        aunque en este caso, dado que se utiliza con frecuencia, no es necesario. */}
+
 
         {/* Si el modal no se usará con poca frecuencia, podríamos cargarlo de forma diferida con lazy, 
         aunque en este caso, dado que se utiliza con frecuencia, no es necesario. */}

@@ -28,7 +28,7 @@ export default function Question({ question, handleAnswer }) {
 
   return (
     <div className="flex flex-col items-center flex-wrap w-full gap-5 border border-violet-400 rounded-lg shadow-md p-5">
-      <div className="flex justify-around w-full">
+      <div className="flex w-full flex-col sm:flex-row justify-around">
       <p className="p-text">
           Difficulty:
           <span className="font-bold uppercase">{question.difficulty}</span>
@@ -43,7 +43,7 @@ export default function Question({ question, handleAnswer }) {
         {question.question}
       </h3>
 
-      <div className="flex gap-3 flex-wrap">
+      <div className="flex gap-3 flex-wrap flex-col sm:flex-row">
         {unorderedAnswerOptions.map(answers => (
           <Button
             disabled={resolved}
